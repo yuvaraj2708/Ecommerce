@@ -1,7 +1,8 @@
-<section id="top-sale">
-    <div class="container py-5">
-        <h2 class="section-title mb-4">Top Sale</h2>
+<section id="new-phones">
+    <div class="container"><br>
+        <h2 class="section-title mb-4">Top Sales</h2>
         <hr class="divider mb-4">
+
         <!-- Owl Carousel -->
         <div class="owl-carousel owl-theme">
             <?php foreach ($product_shuffle as $item) { ?>
@@ -19,22 +20,22 @@
                                 <span class="star">&#9733;</span>
                                 <span class="star">&#9733;</span>
                             </div>
-                            <div class="product-price">$<?php echo $item['item_price'] ?? '0'; ?></div>
-                            <?php if ($item['productcount'] > 0) { ?>
-                                <form method="post">
-                                    <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
-                                    <!-- No need to set user_id here -->
+                            <div class="product-price">₹ <?php echo $item['item_price'] ?? '0'; ?></div>
+                            <form method="post">
+                                <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
+                                <?php if ($item['productcount'] > 0) { ?>
                                     <?php
                                     if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])) {
                                         echo '<button type="submit" disabled class="btn btn-success btn-add-to-cart">In Cart</button>';
                                     } else {
-                                        echo '<button type="submit" name="top_sale_submit" class="btn btn-warning btn-add-to-cart">Add to Cart</button>';
+                                        echo '<button type="submit" name="new_phones_submit" class="btn btn-warning btn-add-to-cart">Add to Cart</button>';
                                     }
                                     ?>
-                                </form>
-                            <?php } else { ?>
-                                <p class="text-danger">Product Not Available</p>
-                            <?php } ?>
+                                <?php } else { ?>
+                                    <p class="text-danger">Product Not Available</p>
+                                <?php } ?>
+                            </form>
                         </div>
                     </div>
                 </div>

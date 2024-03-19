@@ -1,20 +1,30 @@
 <!-- New Product -->
 <?php
-    $brand = array_map(function ($pro){ return $pro['item_brand']; }, $product_shuffle);
-    $unique = array_unique($brand);
-    sort($unique);
-    shuffle($product_shuffle);
+$brand = array_map(function ($pro){ return $pro['item_brand']; }, $product_shuffle);
+$unique = array_unique($brand);
+sort($unique);
+shuffle($product_shuffle);
 
-    // request method post
+// Check if the user is logged in
+if (isset($_SESSION['id'])) {
+    $userId = $_SESSION['id'];
+
+    // Check if the request method is POST
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['new_product_submit'])) {
-            // call method addToCart
-            $Cart->addToCart($_POST['user_id'], $_POST['item_id']);
+            // Call the addToCart method
+            $Cart->addToCart($userId, $_POST['item_id']);
         }
     }
 
-    $in_cart = $Cart->getCartId($product->getData('cart'));
+    // Get the cart items for the logged-in user
+    $in_cart = $Cart->getCartId($userId);
+} else {
+    // User is not logged in, set $in_cart to an empty array
+    $in_cart = [];
+}
 ?>
+
 <section class="product spad" id="new-product">
     <div class="container">
         <h4 class="section-title">New Product</h4>
@@ -51,7 +61,7 @@
                                 <?php if ($item['productcount'] > 0) { ?>
                                     <form method="post">
                                         <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
-                                        <input type="hidden" name="user_id" value="<?php echo 1; ?>">
+                                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['id'] ?>">
                                         <?php
                                         if (in_array($item['item_id'], $in_cart ?? [])) {
                                             echo '<button type="submit" disabled class="btn btn-success font-size-12">In the Cart</button>';

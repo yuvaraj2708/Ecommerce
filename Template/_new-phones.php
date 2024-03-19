@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['new_phones_submit'])) {
         // Check if the user is logged in
         if(isset($_SESSION['id'])) {
+            
             // User is logged in, proceed to add item to the cart
             $Cart->addToCart($_SESSION['id'], $_POST['item_id']);
         } else {
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <section id="new-phones">
     <div class="container">
-        <h2 class="section-title mb-4">New Phones</h2>
+        <h2 class="section-title mb-4">New Sales</h2>
         <hr class="divider mb-4">
 
         <!-- Owl Carousel -->
@@ -44,7 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <div class="product-price">₹ <?php echo $item['item_price'] ?? '0'; ?></div>
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['item_id'] ?? '1'; ?>">
-                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['id']; ?>">
+                                <input type="hidden" name="user_id" value='<?php
+                                                      
+                                                      if($uses != ""){ 
+                                                        echo"$uses";
+                                                      }else{
+                                                        echo"User Unknown";
+                                                      }
+                                                      ?>'>
                                 <?php if ($item['productcount'] > 0) { ?>
                                     <?php
                                     if (in_array($item['item_id'], $Cart->getCartId($product->getData('cart')) ?? [])) {

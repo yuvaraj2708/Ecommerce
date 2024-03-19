@@ -71,15 +71,23 @@ class Cart
         }
     }
 
-    // get item_it of shopping cart list
-    public function getCartId($cartArray = null, $key = "item_id"){
-        if ($cartArray != null){
-            $cart_id = array_map(function ($value) use($key){
-                return $value[$key];
+    public function getCartId($cartArray = null, $key = "item_id") {
+        if (is_array($cartArray)) { // Check if $cartArray is an array
+            $cart_id = array_map(function ($value) use ($key) {
+                if (is_array($value) && isset($value[$key])) { // Check if $value is an array and if the key exists
+                    return $value[$key];
+                } else {
+                    return null; // Return null if key doesn't exist or $value is not an array
+                }
             }, $cartArray);
             return $cart_id;
+        } else {
+            return array(); // Return an empty array if $cartArray is not an array
         }
     }
+    
+    
+    
     public function getCartItemsByUserId($userId)
     {
         if ($this->db->con != null) {

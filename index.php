@@ -4,6 +4,7 @@
     ob_start();
     // include header.php file
     include ('header.php');
+    $uses = $_SESSION['id'];
 ?>
 
 <?php
@@ -11,7 +12,7 @@
     /*  include banner area  */
         include ('Template/_banner-area.php');
     /*  include banner area  */
-
+    
     /*  include top sale section */
         include ('Template/_top-sale.php');
     /*  include top sale section */

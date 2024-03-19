@@ -83,11 +83,12 @@ if (isset($_SESSION['id'])) {
         <li class="active"><a href="./index.php">Home</a></li>
         <li><a href="./shop.php">Shop</a></li>
         <li><a href="./userdetails.php">User details</a></li>
+        <li><a href="./discount_content.php">Discount details</a></li>
         <?php
         if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
             // User is logged in
             echo '<li><a href="./my_account.php">My Account</a></li>';
-            echo '<li><a href="./logout.php">Logout</a></li>';
+           
         } else {
             // User is not logged in
             echo '<li><a href="./login.php">Login</a></li>';
