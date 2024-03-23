@@ -24,11 +24,11 @@ include('header.php');
 
                 <h3>Available Positions</h3><br>
                 <ul class="position-list">
-                    <li>Software Engineer</li><br>
-                    <li>Web Developer</li><br>
-                    <li>Data Scientist</li><br>
-                    <li>Graphic Designer</li><br>
-                    <li>Marketing Specialist</li><br>
+                    <li>Cashier</li><br>
+                    <li>Department Manager</li><br>
+                    <li>Customer service representative</li><br>
+                    <li>Sales</li><br>
+                    <li>Accountant</li><br>
                 </ul>
 
                 <h3>Why Join Us?</h3><br>
@@ -40,12 +40,14 @@ include('header.php');
                 <h2 class="section-title">How to Apply</h2>
                 <p class="section-description">If you're interested in any of the positions listed above or would like to explore other opportunities with us, please fill out the form below or email your resume to careers@example.com.</p>
 
-                <form action="#" method="post" class="application-form">
+                <form class="form" action="send.php" method="post">
+
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="number" name="phone" placeholder="phone">
                     <input type="text" name="position" placeholder="Position of Interest">
                     <textarea name="message" placeholder="Your Message"></textarea>
-                    <button type="submit" class="site-btn">Submit Application</button>
+                    <button type="submit" name="send" class="site-btn">Submit Application</button>
                 </form>
             </div>
         </div>

@@ -19,11 +19,9 @@ include('header.php');
 
 include ('Template/_special-price.php');
 include ('Template/_banner-ads.php');
-include ('Template/_top-sale.php');
 
 
 ?>
-
 
 <?php
 // include footer.php file

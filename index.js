@@ -38,22 +38,27 @@ $(document).ready(function(){
 
 
     // new phones owl carousel
-    $("#new-phones .owl-carousel").owlCarousel({
-        loop: true,
-        nav: false,
-        dots: true,
-        responsive : {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000 : {
-                items: 5
+    $(document).ready(function(){
+        $("#new-phones .owl-carousel").owlCarousel({
+            loop: true,
+            nav: false,
+            dots: true,
+            autoplay: true, // Enable autoplay
+            autoplayTimeout: 3000, // Set autoplay interval to 3 seconds
+            responsive : {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000 : {
+                    items: 5
+                }
             }
-        }
+        });
     });
+    
 
     // blogs owl carousel
     $("#blogs .owl-carousel").owlCarousel({

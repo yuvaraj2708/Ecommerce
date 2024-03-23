@@ -7,21 +7,21 @@
                     <div class="banner__item">
                         <div class="banner__text">
                             <span>The Rahman Plaza Collection</span>
-                            <h1>The Project Jacket</h1>
+                            <h1>All Types Home Appliances</h1>
                             <a href="./shop.php">Shop now</a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
                             <span>The Rahman Plaza Collection</span>
-                            <h1>The Project Jacket</h1>
+                            <h1>All Types of Steel Items</h1>
                             <a href="./shop.php">Shop now</a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
                             <span>The Rahman Plaza Collection</span>
-                            <h1>The Project Jacket</h1>
+                            <h1>All Types of Bags</h1>
                             <a href="./shop.php">Shop now</a>
                         </div>
                     </div>

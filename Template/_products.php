@@ -36,13 +36,13 @@
                 <h5 class="font-baloo font-size-20"><?php echo $item['item_name'] ?? "Unknown"; ?></h5>
                 <small>by <?php echo $item['item_brand'] ?? "Brand"; ?></small>
                 <div class="d-flex">
-                    <div class="rating text-warning font-size-12">
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="far fa-star"></i></span>
-                    </div>
+                <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
                     <a href="#" class="px-2 font-rale font-size-14">20,534 ratings | 1000+ answered questions</a>
                 </div>
                 <hr class="m-0">
@@ -159,3 +159,10 @@
         endif;
         endforeach;
 ?>
+
+<style>
+    .rating {
+    color: #f8b739;
+    margin-bottom: 10px;
+}
+</style>

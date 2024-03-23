@@ -1,5 +1,5 @@
 <section id="new-phones">
-    <div class="container"><br>
+    <div class="container">
         <h2 class="section-title mb-4">Top Sales</h2>
         <hr class="divider mb-4">
 
@@ -8,7 +8,8 @@
             <?php foreach ($product_shuffle as $item) { ?>
                 <div class="item">
                     <div class="product-card">
-                        <a href="<?php printf('%s?item_id=%s', 'product.php', $item['item_id']); ?>">
+                        <a href="<?php printf('%s?item_id=%s', 'product.php', $item['item_id']); ?>" class="product__item__pic">
+                            <div class="image-overlay"></div>
                             <img src="<?php echo $item['item_image'] ?? "./assets/products/1.png"; ?>" alt="Product Image" class="product-image">
                         </a>
                         <div class="product-info">
@@ -44,6 +45,8 @@
         <!-- Owl Carousel End -->
     </div>
 </section>
+
+
 <style>/* Additional CSS styles for the top sale section */
 .section-title {
     text-align: center;
@@ -52,59 +55,66 @@
     margin-bottom: 30px;
 }
 
-.divider {
-    border-top: 2px solid #333;
-    width: 100px;
-    margin: auto;
-    margin-bottom: 30px;
+.product-card {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 220px;
+    height: 450px;
 }
 
-.owl-carousel .owl-item .product-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.product__item__pic {
+    position: relative;
+    overflow: hidden;
+    display: block;
 }
 
-.product-image {
-    width: 100%;
+.product__item__pic img {
+    max-width: 100%;
+    max-height: 100%;
     height: auto;
     display: block;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Adjust the transparency here */
+    z-index: 1;
+    opacity: 0; /* Initially invisible */
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover .image-overlay {
+    opacity: 1; /* Make overlay visible on hover */
 }
 
 .product-info {
-    text-align: center;
-}
-
-.product-name {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-}
-
-.product-rating {
-    color: #f8b739;
-    margin-bottom: 10px;
-}
-
-.product-price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.btn-add-to-cart {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    font-size: 1rem;
-    padding: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 20px;
+    z-index: 2;
+    color: #fff;
 }
 
-.btn-add-to-cart:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.product-info h3,
+.product-info .product-rating,
+.product-info .product-price {
+    margin-bottom: 10px;
 }
+
+.product-info .btn-add-to-cart {
+    width: 100%;
+}
+
 </style>

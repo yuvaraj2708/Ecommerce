@@ -26,7 +26,31 @@ if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 ?>
+<?php
+$brand = array_map(function ($pro){ return $pro['item_brand']; }, $product_shuffle);
+$unique = array_unique($brand);
+sort($unique);
+shuffle($product_shuffle);
 
+// Check if the user is logged in
+if (isset($_SESSION['id'])) {
+    $userId = $_SESSION['id'];
+
+    // Check if the request method is POST
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if (isset($_POST['new_product_submit'])) {
+            // Call the addToCart method
+            $Cart->addToCart($userId, $_POST['item_id']);
+        }
+    }
+
+    // Get the cart items for the logged-in user
+    $in_cart = $Cart->getCartId($userId);
+} else {
+    // User is not logged in, set $in_cart to an empty array
+    $in_cart = [];
+}
+?>
 
 
 <!DOCTYPE html>
@@ -81,7 +105,23 @@ if (isset($_SESSION['id'])) {
                 <nav class="header__menu">
                 <ul>
     <li <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'class="active"' : ''; ?>><a href="./index.php">Home</a></li>
-    <li <?php echo (basename($_SERVER['PHP_SELF']) == 'shop.php') ? 'class="active"' : ''; ?>><a href="./shop.php">Shop</a></li>
+    <li class="dropdown">
+    <a href="./shop.php" class="dropdown-toggle <?php echo (basename($_SERVER['PHP_SELF']) == 'shop.php') ? 'active' : ''; ?>">Shop</a>
+    <div class="dropdown-menu">
+        <?php
+        // Loop through brands and display them in three columns
+        $counter = 0;
+        foreach ($unique as $brand) {
+            // If counter is divisible by 3, start a new row
+            if ($counter % 3 == 0) {
+                echo '<div style="clear:both;"></div>'; // Clear float to start a new row
+            }
+            printf('<a href="./shop.php?filter=%s">%s</a>', $brand, $brand);
+            $counter++;
+        }
+        ?>
+    </div>
+</li>
     <li <?php echo (basename($_SERVER['PHP_SELF']) == 'blog.php') ? 'class="active"' : ''; ?>><a href="./blog.php">Blog</a></li>
     <li <?php echo (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'class="active"' : ''; ?>><a href="./contact.php">Contact</a></li>
     <li <?php echo (basename($_SERVER['PHP_SELF']) == 'career.php') ? 'class="active"' : ''; ?>><a href="./career.php">Career</a></li>
@@ -164,3 +204,58 @@ if ($result) {
 <!-- start #main-site -->
 <main id="main-site">
 
+<style>
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        width: auto; /* Adjust width to fit content */
+        padding: 10px;
+        min-width: 200px; /* Set minimum width to avoid collapsing */
+        border: 1px solid #ddd; /* Add border for separation */
+        border-radius: 5px; /* Add border radius for rounded corners */
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu a {
+        color: black;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Add styling to create grid layout */
+    .dropdown-menu .menu-column {
+        display: inline-block;
+        vertical-align: top;
+        width: 33.33%; /* Set width for three columns */
+        padding: 0 10px; /* Add padding for spacing between columns */
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+
+        // Add click event listeners to all dropdown items
+        dropdownMenu.querySelectorAll('a').forEach(function (item) {
+            item.addEventListener('click', function (event) {
+                // Prevent the default link behavior
+                event.preventDefault();
+                // Get the filter value from the link's href attribute
+                var filter = this.getAttribute('href').split('=')[1];
+                // Navigate to shop.php with the filter query parameter
+                window.location.href = './shop.php?filter=' + filter;
+            });
+        });
+    });
+</script>
